@@ -61,28 +61,29 @@ restart powershell
 > python3 manage.py startapp djangoApp
 
 9- add django app to the setting 
-
-$ 'appname.apps.AppnameConfig',
-
+```
+'appname.apps.AppnameConfig',
+```
 10- create first view 
 
+```
 from django.http import HttpResponse
 def homepage(request):
-	return HttpResponse("<h1> this homepage </h1>")
-	
+ return HttpResponse("<h1> this homepage </h1>")
+```
+
 11- create urls
 
-from django.urls import path
-from . import views
+$ from django.urls import path
+$ from . import views
 
-urlpatterns = [
-
-    path('', views.homepage , name='home')
-]	
+$ urlpatterns = [
+$    path('', views.homepage , name='home')
+$ ]	
 
 12- config app urls in project urls
 
-path('', include('appname.urls')),	
+$ path('', include('appname.urls')),	
 
 13- create tamplates
 
@@ -93,9 +94,9 @@ create folder name templates
 1- create folder name static 
 2- load static in html
 
-{% load static %} 
-
-<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+$ {% load static %} 
+$
+$ <link rel="stylesheet" href="{% static 'css/w3.css' %}">
 
 <img src="{% static 'img/anchor.png' %}">
 
