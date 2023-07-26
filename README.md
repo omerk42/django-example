@@ -73,17 +73,20 @@ def homepage(request):
 ```
 
 11- create urls
+```
+ from django.urls import path
+ from . import views
 
-$ from django.urls import path
-$ from . import views
 
-$ urlpatterns = [
-$    path('', views.homepage , name='home')
-$ ]	
+ urlpatterns = [
+    path('', views.homepage , name='home')
+ ]	
+```
 
 12- config app urls in project urls
-
+```
 $ path('', include('appname.urls')),	
+```
 
 13- create tamplates
 
@@ -93,29 +96,34 @@ create folder name templates
 
 1- create folder name static 
 2- load static in html
+```
 
-$ {% load static %} 
-$
-$ <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+ {% load static %} 
+
+ <link rel="stylesheet" href="{% static 'css/w3.css' %}">
 
 <img src="{% static 'img/anchor.png' %}">
 
 <img src="{% static 'img/cup.png' %}">
+```
 
+ 
 14- use django template lang
 
-1- create blocs
 
+ 
+1- create blocs
+```
 {% block title %}
      any title you want
 {% endblock title %}
-
+```
 2- create new html file in template folder
 
 3- extend base html
-
+```
 {% extends 'urBaseHtmlFile.html' %}
-
+```
 4- change blocks as you like
 
 15- models
@@ -123,11 +131,11 @@ $ <link rel="stylesheet" href="{% static 'css/w3.css' %}">
 1- create app models
 
 2- add models to the admin
-
+```
 from .models import Contact
 
 admin.site.register(Contact)
-
+```
 3- migrate database
 
 > python3 manage.py makemigrations
@@ -141,21 +149,21 @@ admin.site.register(Contact)
 5- access model via admin
 
 6- edit model to be more readable
-
+```
 def __str__(self):
         return self.title
-
+```
 7- edit admin to be more useful
-
+```
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('title','date')
     ordering = ('date',)
     search_fields  = ('title','email')  
-    
+```    
 16 - forms 
 
 1- create forms.py
-
+```
 from django import forms
 from django.forms import ModelForm
 from .models import Contact
@@ -164,15 +172,15 @@ class ContactForm(ModelForm):
     class Meta:
         model = Contact
         exclude = ['date']   
-
+```
 2- add form to the view 
-
+```
 form = ContactForm()    
 
 ,{'form':form}
-
+```
 3- add form to template
-
+```
 <div class="w3-row-padding w3-padding-64 w3-container">
     <div class="w3-content">
         <table>
@@ -186,9 +194,9 @@ form = ContactForm()
 <form action="" method="post" novalidate>
 
 {% csrf_token %}     
-
+```
 4- take input in view
-
+```
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -196,9 +204,9 @@ form = ContactForm()
             messages.success(request, 'Thanx , we recevid your message ')
         else:
             messages.warning(request, str(form.errors)) 
-
+```
 5- show messages in tamplate
-
+```
   {% for message in messages %}
   {% if message.tags == 'success' %}
   <div class="w3-panel w3-green w3-center" style="padding:30px 5px"> 
@@ -210,4 +218,4 @@ form = ContactForm()
   </div>
   {% endif %} 
   {% endfor %}            
-                      
+```                   
